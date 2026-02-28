@@ -3,26 +3,15 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  // Important: No base path needed for Vercel
+  base: './',
   build: {
     outDir: 'dist',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
+    emptyOutDir: true,
     rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          animations: ['framer-motion'],
-          utils: ['react-hot-toast', 'react-intersection-observer']
-        }
+      input: {
+        main: 'index.html'
       }
     }
-  },
-  server: {
-    port: 3000
   }
 })
